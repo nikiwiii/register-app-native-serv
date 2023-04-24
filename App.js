@@ -12,8 +12,8 @@ class App extends React.Component {
     super(props);
     this.state = {
       people: [
-      {name: 'janusz', password: 'jajaja'},
-      {name: 'krzysztof', password: 'ajaja'}
+      {name: 'janusz', password: 'jajaja', registered: new Date().toLocaleString()},
+      {name: 'krzysztof', password: 'ajaja', registered: new Date().toLocaleString()}
     ]
     }
   }
