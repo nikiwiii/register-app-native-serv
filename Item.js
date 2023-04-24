@@ -9,10 +9,10 @@ class Item extends React.Component {
             <Image source={img} style={styles.image}></Image>
             <View>
                 <View style={{display: 'flex', flexDirection: 'row'}}>
-                    <Pressable style={styles.buttons} onPress={this.props.func}><Text style={{color: 'white'}}>details</Text></Pressable>
-                    <Pressable style={styles.buttons} onPress={() => console.log('yuh')}><Text style={{color: 'white'}}>delete</Text></Pressable>
+                    <Pressable style={styles.buttons} onPress={this.props.func}><Text style={styles.text}>DETAILS</Text></Pressable><Text>  </Text>
+                    <Pressable style={styles.buttons} onPress={() => console.log('yuh')}><Text style={styles.text}>DELETE</Text></Pressable>
                 </View>
-                <Text style={{alignSelf: 'center', color: 'white'}}>{this.props.name}</Text>
+                <Text style={{color: 'white', fontSize: 20}}>{this.props.name}</Text>
             </View>
         </View>)
     }
@@ -22,25 +22,34 @@ const styles = StyleSheet.create({
         display: 'flex',
         justifyContent: 'space-evenly',
         flexDirection: 'row',
-        marginBottom: 25,
-        marginTop: 25
+        marginBottom: 10,
+        marginTop: 10,
+        backgroundColor: 'rgba(255 255 255 / .07)',
+        paddingTop: 10,
+        paddingBottom: 10,
+        borderRadius: 20
     },
     image: {
         width: 80,
         height: 80,
-        alignSelf: 'center'
+        alignSelf: 'center',
+        opacity: .7
     },
     buttons: {
         height: 40,
-        width: 100,
-        margin: 12,
+        marginBottom: 20,
         alignSelf: 'center',
-        borderColor: 'white',
-        borderBottomWidth: 1,
-        backgroundColor: '#2A4494',
+        borderColor: 'gainsboro',
+        borderBottomWidth: .5,
+        borderTopWidth: .5,
+        backgroundColor: 'transparent',
         justifyContent: 'center',
-        alignItems: 'center',
-        borderRadius: 5
+        alignItems: 'center'
+    },
+    text: {
+        color: 'gainsboro',
+        fontWeight: 'bold',
+        fontSize: 20
     }
   });
 export default Item;

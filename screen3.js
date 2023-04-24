@@ -5,19 +5,27 @@ class Screen3 extends React.Component {
 
     render(){
         const img = require('./person.png')
-        return(
+        return(<View style={styles.full}>
           <View style={styles.centered}>
             <Image source={img} style={styles.image}></Image>
-            <Text style={{color: 'gainsboro'}}>login:</Text>
+            <Text style={{color: '#2B4AAA'}}>LOGIN:</Text>
             <Text style={{color: 'white', fontSize: 26}}>{this.props.route.params.el.name}</Text>
-            <Text style={{color: 'gainsboro'}}>password:</Text>
+            <Text style={{color: '#2B4AAA'}}>PASSWORD:</Text>
             <Text style={{color: 'white', fontSize: 26}}>{this.props.route.params.el.password}</Text>
-            <Text style={{color: 'gainsboro'}}>registered:</Text>
+            <Text style={{color: '#2B4AAA'}}>REGISTERED:</Text>
             <Text style={{color: 'white', fontSize: 26}}>{this.props.route.params.el.registered}</Text>
+          </View>
           </View>)
     }
 }
 const styles = StyleSheet.create({
+    full: {
+        backgroundColor: 'rgba(42 69 148 / .6)',
+        display: 'flex',
+        alignItems: 'center',
+        flexDirection: 'column',
+        flex:1,
+    },
     centered: {
         display: 'flex',
         alignItems: 'center',
@@ -25,7 +33,7 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         marginBottom: 25,
         marginTop: 25,
-        flex:.8
+        flex:.8,
     },
     image: {
         width: 160,

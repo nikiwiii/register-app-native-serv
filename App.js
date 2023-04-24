@@ -13,10 +13,32 @@ class App extends React.Component {
     this.state = {
       people: [
       {name: 'janusz', password: 'jajaja', registered: new Date().toLocaleString()},
-      {name: 'krzysztof', password: 'ajaja', registered: new Date().toLocaleString()}
+      {name: 'krzysztof', password: 'ajaja', registered: new Date().toLocaleString()},
+      {name: 'janusz', password: 'jajaja', registered: new Date().toLocaleString()},
+      {name: 'janusz', password: 'jajaja', registered: new Date().toLocaleString()},
+      {name: 'krzysztof', password: 'ajaja', registered: new Date().toLocaleString()},
+      {name: 'janusz', password: 'jajaja', registered: new Date().toLocaleString()},
     ]
     }
   }
+
+  addUser = (name,pass) => {
+    this.setState({
+      people: this.state.people.push({name: name, password: pass, registered: new Date().toLocaleString()})
+    })
+  }
+
+  // componentDidMount() {
+  //   fetch('/people')
+  //     .then(res => {
+  //         console.log(res);
+  //         return res.json()
+  //      })
+  //     .then(users => { 
+  //         console.log(users); 
+  //         this.setState({ people: users })
+  //      });
+  //  }
 
   render() {
     return (
@@ -31,7 +53,7 @@ class App extends React.Component {
           name="list"
           component={Screen2}
           options={{title: 'User list'}}
-          initialParams={{users: this.state.people}}/>
+          initialParams={{users: this.state.people, addUser: this.addUser}}/>
 
         <Stack.Screen
           name="details"
