@@ -3,16 +3,18 @@ import { View, StyleSheet, Pressable, Text } from 'react-native';
 import Item from './Item'
 
 class Screen2 extends React.Component {
-    goToScr3 = () => {
-        this.props.navigation.navigate('details')
+  constructor(){
+    super();
+  }
+    goToScr3 = (el) => {
+        this.props.navigation.navigate('details', { el })
     }
     render(){
-        console.log(this.props.route.params.users);
         return(<View style={styles.centered}>
             <Pressable style={styles.buttons} onPress={() => this.props.navigation.navigate('log in')}><Text style={{color: 'white'}}>BACK TO LOGIN PAGE</Text></Pressable>
             {
-                this.props.route.params.users.forEach(element,i => {
-                    return(<Item name={`${i}:${element.name}`} func={this.goToScr3}/>)
+                this.props.route.params.users.map((element,i) => {
+                    return(<Item name={i + ' : ' + element.name} func={() => this.goToScr3(element)} />)
                 })
             }
             </View>)
