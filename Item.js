@@ -10,7 +10,7 @@ class Item extends React.Component {
             <View>
                 <View style={{display: 'flex', flexDirection: 'row'}}>
                     <Pressable style={styles.buttons} onPress={this.props.func}><Text style={{color: 'white'}}>details</Text></Pressable>
-                    <Pressable style={styles.buttons} onPress={console.log('yuh')}><Text style={{color: 'white'}}>delete</Text></Pressable>
+                    <Pressable style={styles.buttons} onPress={() => console.log('yuh')}><Text style={{color: 'white'}}>delete</Text></Pressable>
                 </View>
                 <Text style={{alignSelf: 'center', color: 'white'}}>{this.props.name}</Text>
             </View>
