@@ -6,6 +6,7 @@ class Screen1 extends React.Component {
     pass = ''
     render(){
         return(<View style={styles.centered}>
+          <Text style={{height: 12}}> </Text>
           <View style={styles.colored}>
             <Text style={styles.rt}>R</Text><Text style={styles.rt}>E</Text><Text style={styles.rt}>G</Text><Text style={styles.rt}>I</Text>
             <Text style={styles.rt}>S</Text><Text style={styles.rt}>T</Text><Text style={styles.rt}>E</Text><Text style={styles.rt}>R</Text>
@@ -26,8 +27,20 @@ class Screen1 extends React.Component {
         </View>)
     }
     register = () => {
-      // console.log(this.props.route.params.addUser);
-      // this.props.route.params.addUser(this.name,this.pass)
+      if(this.name && this.pass){
+        fetch('http://192.168.10.112:4000/send', {
+          method: 'POST',
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            name: this.name,
+            password: this.pass,
+            registered: new Date().toLocaleString()
+          }),
+        });
+      }
       this.props.navigation.navigate('list')
     }
 }
@@ -39,18 +52,16 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     borderColor: 'gainsboro',
     borderBottomWidth: .5,
-    backgroundColor: '#2B4AAA',
     paddingLeft: 10,
     color: 'white'
   },
   centered: {
     flex: 1,
     display: 'flex',
-    backgroundColor: '#2A4494'
+    backgroundColor: '#2A4000'
   },
   colored: {
     flex: .65,
-    backgroundColor: '#2B4494',
     display: 'flex',
     flexDirection: 'row',
     flexWrap: 'wrap',
