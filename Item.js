@@ -1,14 +1,20 @@
 import React from 'react';
 import { Text, Pressable, View, Image, StyleSheet, DeviceEventEmitter } from 'react-native';
 
-class Item extends React.Component {
+class ListItem extends React.Component {
+    constructor(props){
+        super(props);
+        this.state = {
+
+        }
+    }
     render(){
         const img = require('./person.png')
         return(
         <View style={styles.centered}>
             <Image source={img} style={styles.image}></Image>
             <View style={styles.container}>
-                <Text style={{color: 'white', fontSize: 20, textAlign: 'center', textDecorationLine: 'underline'}}>{this.props.name}</Text>
+                <Text style={{color: 'white', opacity: .6, fontSize: 20, textAlign: 'center', textDecorationLine: 'underline'}}>{this.props.name}</Text>
                 <View style={{display: 'flex', flexDirection: 'row'}}>
                     <Pressable style={styles.buttons} onPress={this.props.func}><Text style={styles.text}>DETAILS</Text></Pressable><Text>  </Text>
                     <Pressable style={styles.buttons} onPress={() => this.delete()}><Text style={styles.text}>DELETE</Text></Pressable>
@@ -18,7 +24,7 @@ class Item extends React.Component {
     }
 
     delete() {
-        fetch('http://192.168.10.112:4000/delete', {
+        fetch(this.props.deleteLink, {
           method: 'POST',
           headers: {
             Accept: 'application/json',
@@ -40,7 +46,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         marginBottom: 10,
         marginTop: 10,
-        backgroundColor: 'rgba(0 0 0 / .2)',
+        backgroundColor: 'rgba(75, 112, 0 / .15)',
         paddingTop: 10,
         paddingBottom: 10,
         borderRadius: 20,
@@ -52,20 +58,21 @@ const styles = StyleSheet.create({
         width: 80,
         height: 80,
         alignSelf: 'center',
-        opacity: .2
+        opacity: .6
     },
     buttons: {
         backgroundColor: 'transparent',
         justifyContent: 'center',
     },
     text: {
-        borderColor: 'gainsboro',
+        borderColor: 'white',
         borderBottomWidth: .5,
         borderTopWidth: .5,
-        color: 'gainsboro',
+        color: 'white', 
         fontWeight: 'bold',
         fontSize: 20,
-        paddingTop: 2
+        paddingTop: 2,
+        opacity: .6
     }
   });
-export default Item;
+export default ListItem;

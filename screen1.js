@@ -1,7 +1,17 @@
 import React from 'react';
-import { Pressable, TextInput, StyleSheet, View, Text } from 'react-native';
+import { TextInput, StyleSheet, View, Text, ToastAndroid } from 'react-native';
+import MyButton from './button';
 
 class Screen1 extends React.Component {
+  constructor(){
+    super();
+    this.state = {
+      Settings: {
+        adres: 'http://192.168.10.112',
+        port: ':4000'
+        }
+    }
+  }
     name = ''
     pass = ''
     render(){
@@ -15,20 +25,20 @@ class Screen1 extends React.Component {
         placeholder="name"
         placeholderTextColor="gainsboro" 
         style={styles.input}
-        onChangeText={newText => this.name = newText}></TextInput>
+        onChangeText={newText => this.name = newText}
+        ref={input => {this.input1 = input}}></TextInput>
           <TextInput
         placeholder="password"
         placeholderTextColor="gainsboro" 
         style={styles.input}
-        onChangeText={newText => this.pass = newText}></TextInput>
-          <Pressable style={styles.buttons} onPress={() => this.register()}>
-            <Text style={styles.text}>REGISTER</Text>
-          </Pressable>
+        onChangeText={newText => this.pass = newText}
+        ref={input => {this.input2 = input}}></TextInput>
+          <MyButton styles={styles} func={() => this.register()} text='REGISTER'></MyButton>
         </View>)
     }
-    register = () => {
+    async register() {
       if(this.name && this.pass){
-        fetch('http://192.168.10.112:4000/send', {
+        const response = await fetch(this.state.Settings.adres + this.state.Settings.port + '/send', {
           method: 'POST',
           headers: {
             Accept: 'application/json',
@@ -40,8 +50,29 @@ class Screen1 extends React.Component {
             registered: new Date().toLocaleString()
           }),
         });
+        const res = await response.json()
+        console.log(res);
+        if(res == 'user exists'){
+          ToastAndroid.showWithGravity('server: '+res,
+          ToastAndroid.SHORT,
+          ToastAndroid.CENTER)
+        }
+        else {
+          this.input1.clear()
+          this.input2.clear()
+          this.name = ''
+          this.pass = ''
+          this.props.navigation.navigate('list', {
+            adres: this.state.Settings.adres,
+            port: this.state.Settings.port
+          })
+        }
       }
-      this.props.navigation.navigate('list')
+      else {
+        ToastAndroid.showWithGravity('wpisz nazwę i hasło',
+        ToastAndroid.SHORT,
+        ToastAndroid.CENTER)
+      }
     }
 }
 const styles = StyleSheet.create({
