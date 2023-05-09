@@ -7,7 +7,7 @@ class Screen1 extends React.Component {
     super();
     this.state = {
       Settings: {
-        adres: 'http://192.168.10.112',
+        adres: 'http://192.168.1.1',
         port: ':4000'
         }
     }
